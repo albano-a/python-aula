@@ -2,7 +2,7 @@ import streamlit as st
 
 st.set_page_config(page_title="Aula: Estruturas de Controle", layout="centered")
 
-st.title("🧠 Aula Interativa: Estruturas de Controle em Python")
+st.title("Aula Interativa: Estruturas de Controle em Python")
 
 aba = st.sidebar.radio(
     "Tópicos",
@@ -17,7 +17,7 @@ aba = st.sidebar.radio(
 )
 
 if aba == "Introdução":
-    st.header("📌 O que são estruturas de controle?")
+    st.header("O que são estruturas de controle?")
     st.markdown(
         """
     São instruções que **controlam o fluxo** da execução de um programa.
@@ -29,7 +29,7 @@ if aba == "Introdução":
     )
 
 elif aba == "Condicional: if / elif / else":
-    st.header("✅ Condicional: if / elif / else")
+    st.header("Condicional: if / elif / else")
 
     st.markdown(
         """
@@ -58,7 +58,7 @@ else:
         st.info("Você é um adulto.")
 
 elif aba == "Repetição: for":
-    st.header("🔁 Estrutura de repetição: for")
+    st.header("Estrutura de repetição: for")
 
     n = st.slider("Escolha um número inteiro:", 1, 20, 5)
     st.code(
@@ -70,11 +70,11 @@ for i in range({n}):
 
     st.markdown("Resultado:")
     with st.expander("Executar"):
-        for i in range(n):
-            st.write(i)
+        result = [i for i in range(n)]
+        st.write(result)
 
 elif aba == "Repetição: while":
-    st.header("🔄 Estrutura de repetição: while")
+    st.header("Estrutura de repetição: while")
 
     limite = st.slider("Valor máximo (while < limite)", 1, 20, 5)
 
@@ -90,12 +90,14 @@ while i < {limite}:
     st.markdown("Resultado:")
     with st.expander("Executar"):
         i = 0
+        result = []
         while i < limite:
-            st.write(i)
+            result.append(i)
             i += 1
+        st.write(result)
 
 elif aba == "Operadores Lógicos":
-    st.header("🔗 Operadores lógicos")
+    st.header("Operadores lógicos")
 
     st.markdown(
         """
@@ -122,7 +124,7 @@ elif aba == "Operadores Lógicos":
         st.error("Não pode dirigir.")
 
 elif aba == "Desafio Final":
-    st.header("🚀 Desafio Final")
+    st.header("Desafio Final")
 
     st.markdown(
         """
@@ -149,13 +151,21 @@ else:
     )
 
     if num % 2 == 0:
-        st.write("🔵 Par")
+        st.write("Par")
     else:
-        st.write("🟠 Ímpar")
+        st.write("Ímpar")
 
     if num > 0:
-        st.write("🟢 Positivo")
+        st.write("Positivo")
     elif num < 0:
-        st.write("🔴 Negativo")
+        st.write("Negativo")
     else:
-        st.write("⚪ Zero")
+        st.write("Zero")
+
+    # Interactive execution
+    with st.expander("Executar"):
+        result = {
+            "Paridade": "Par" if num % 2 == 0 else "Ímpar",
+            "Sinal": "Positivo" if num > 0 else "Negativo" if num < 0 else "Zero",
+        }
+        st.json(result)
